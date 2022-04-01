@@ -11,7 +11,8 @@ def convertSQLtoCSV(file_name):
         if line_list and line_list[0] == "CREATE" and line_list[1] == "TABLE":
             create_new_csv_table(line_list[2][1:-1], file)
         if line_list and line_list[0] == "INSERT" and line_list[1] == "INTO":
-            insert_into(line[2][1:-1], line)
+            insert_into(line_list[2][1:-1], line)
+
     file.close()
 
 
@@ -37,11 +38,13 @@ def create_new_csv_table(file_name, sql_file):
 def insert_into(file_name, line):
     csv_file = open("./csv_output/" + file_name + ".csv", "a")
 
-    i = line.index('VALUES ')
-    values = line[i + 1 :-1]
-    values = values.split( "),(" )
+    i = line.index('(')
 
-    csv_file.writelines(values)
+    values = line[i + 1 :-3]
+    values = values.split( "),(" )
+    csv_file.write('\n'.join(values))
+
+    # csv_file.writelines(values)
     # print(values)
     # csv_file.write('\n')
     csv_file.close()
