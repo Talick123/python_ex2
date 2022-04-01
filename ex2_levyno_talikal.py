@@ -1,3 +1,6 @@
+
+import os
+
 def convertSQLtoCSV(file_name):
     file = open(file_name, 'r')
 
@@ -18,5 +21,9 @@ def convertSQLtoCSV(file_name):
 #     # check insert into
 #     # close file
 
-convertSQLtoCSV(r"C:\Users\Tali\Documents\Hadassah\Second Year\Second Semester\OS2\Python Exercises\demo-sql\demo.sql")
-# convertSQLtoCSV("")
+# convertSQLtoCSV(r"C:\Users\Tali\Documents\Hadassah\Second Year\Second Semester\OS2\Python Exercises\demo-sql\demo.sql")
+
+
+f = os.getcwd().split("\\")
+the_path = "/".join(f)
+convertSQLtoCSV(the_path + "/../demo-sql/demo.sql")
